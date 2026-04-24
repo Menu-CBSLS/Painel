@@ -12,12 +12,7 @@
   <link rel="apple-touch-icon" href="icon-192.png" />
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; }
 
     body {
       background: linear-gradient(135deg, #eaf2fb, #d8e7f7);
@@ -26,10 +21,7 @@
       padding: 24px;
     }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    .container { max-width: 1100px; margin: 0 auto; }
 
     .topo {
       background: #fff;
@@ -40,23 +32,9 @@
       text-align: center;
     }
 
-    .topo h1 {
-      color: #0f4c81;
-      font-size: 2rem;
-      margin-bottom: 6px;
-    }
-
-    .topo h2 {
-      font-size: 1.1rem;
-      color: #5b6b7b;
-      margin-bottom: 10px;
-    }
-
-    .topo p {
-      color: #6b7280;
-      margin-top: 8px;
-      line-height: 1.5;
-    }
+    .topo h1 { color: #0f4c81; font-size: 2rem; margin-bottom: 6px; }
+    .topo h2 { font-size: 1.1rem; color: #5b6b7b; margin-bottom: 10px; }
+    .topo p { color: #6b7280; margin-top: 8px; line-height: 1.5; }
 
     .info-bar {
       margin-top: 14px;
@@ -75,6 +53,7 @@
     }
 
     .card {
+      position: relative;
       background: #fff;
       border-radius: 22px;
       padding: 24px;
@@ -84,24 +63,17 @@
       justify-content: space-between;
       border-top: 6px solid #0f4c81;
       min-height: 250px;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 34px rgba(0,0,0,0.12);
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.15);
     }
 
-    .icon {
-      font-size: 2.2rem;
-      margin-bottom: 12px;
-    }
+    .icon { font-size: 2.2rem; margin-bottom: 12px; }
 
-    .card h3 {
-      color: #0f4c81;
-      margin-bottom: 10px;
-      font-size: 1.3rem;
-    }
+    .card h3 { color: #0f4c81; margin-bottom: 10px; font-size: 1.3rem; }
 
     .card p {
       color: #4b5563;
@@ -109,12 +81,39 @@
       line-height: 1.5;
     }
 
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 16px;
+    /* ALERTA */
+    .card p.alerta {
+      font-size:0.85rem;
+      color:#b71c1c;
+      font-weight:700;
+      background:#fdecea;
+      padding:6px 10px;
+      border-radius:8px;
+      display:inline-block;
     }
+
+    /* 🔥 BADGE PROTÓTIPO */
+    .badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #d32f2f;
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.08); opacity: 0.85; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
 
     .tag {
       background: #eef4fb;
@@ -137,18 +136,20 @@
     }
 
     .rodape {
-      text-align: center;
-      margin-top: 22px;
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
       color: #6b7280;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
     }
 
-    /* 🔥 ALERTA AJUSTADO (SEM REDUZIR LAYOUT) */
-    .alerta {
-      margin-top:6px;
-      font-size:0.85rem;
-      color:#d32f2f;
-      font-weight:700;
+    .versao {
+      background: #edf6ff;
+      padding: 6px 12px;
+      border-radius: 999px;
+      color: #0f4c81;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -174,94 +175,65 @@ Acesso rápido aos sistemas:
 
 <div class="grid">
 
-<!-- CONTROLE NUMÉRICO -->
 <div class="card">
 <div>
 <div class="icon">🔢</div>
 <h3>Controle Numérico</h3>
 <p>Controle de numeração de documentos e mensagens.</p>
-<div class="tags">
-<span class="tag">Mensagens</span>
-<span class="tag">BI</span>
-<span class="tag">Partes</span>
-</div>
+<div class="tags"><span class="tag">Mensagens</span><span class="tag">BI</span><span class="tag">Partes</span></div>
 </div>
 <a class="btn" href="https://cbsls.github.io/controle-numerico/" target="_blank">Abrir</a>
 </div>
 
-<!-- PROTOCOLO -->
 <div class="card">
 <div>
 <div class="icon">📂</div>
 <h3>Protocolo</h3>
 <p>Registro de entrada e saída de documentos.</p>
-<div class="tags">
-<span class="tag">Documentos</span>
-<span class="tag">Controle</span>
-</div>
+<div class="tags"><span class="tag">Documentos</span><span class="tag">Controle</span></div>
 </div>
 <a class="btn" href="https://cbsls.github.io/protocolo/" target="_blank">Abrir</a>
 </div>
 
-<!-- DIÁRIO -->
 <div class="card">
 <div>
 <div class="icon">🚒</div>
 <h3>Diário de Bordo</h3>
 <p>Registro completo de saídas, retornos, horários e KM das VTRs.</p>
-<div class="tags">
-<span class="tag">Operacional</span>
-<span class="tag">KM</span>
-<span class="tag">VTR</span>
-</div>
+<div class="tags"><span class="tag">Operacional</span><span class="tag">KM</span><span class="tag">VTR</span></div>
 </div>
 <a class="btn" href="https://cbsls.github.io/diariodebordo/" target="_blank">Abrir</a>
 </div>
 
-<!-- CHECKLIST -->
 <div class="card">
-<div>
+<div class="badge">PROTÓTIPO</div>
 <div class="icon">✅</div>
 <h3>Checklist Operacional</h3>
 <p>Conferência de materiais e equipamentos das VTRs.</p>
 <p class="alerta">⚠️ Protótipo - Fase de Testes</p>
-<div class="tags">
-<span class="tag">Conferência</span>
-<span class="tag">Materiais</span>
-<span class="tag">VTR</span>
-</div>
+<div class="tags"><span class="tag">Conferência</span><span class="tag">Materiais</span><span class="tag">VTR</span></div>
 </div>
 <a class="btn" href="https://cbsls.github.io/checklist/" target="_blank">Abrir</a>
 </div>
 
-<!-- ESCALA -->
 <div class="card">
-<div>
+<div class="badge">PROTÓTIPO</div>
 <div class="icon">📅</div>
 <h3>Escala CBSLS</h3>
 <p>Visualização da escala semanal com troca e busca de militares.</p>
 <p class="alerta">⚠️ Protótipo - Fase de Testes</p>
-<div class="tags">
-<span class="tag">Escala</span>
-<span class="tag">Turnos</span>
-<span class="tag">Trocas</span>
-</div>
+<div class="tags"><span class="tag">Escala</span><span class="tag">Turnos</span><span class="tag">Trocas</span></div>
 </div>
 <a class="btn" href="https://cbsls.github.io/escala/" target="_blank">Abrir</a>
 </div>
 
-<!-- CHAMADOS -->
 <div class="card">
-<div>
+<div class="badge">PROTÓTIPO</div>
 <div class="icon">🛠️</div>
 <h3>Chamados de Manutenção</h3>
 <p>Registro e acompanhamento de chamados internos do quartel.</p>
 <p class="alerta">⚠️ Protótipo - Fase de Testes</p>
-<div class="tags">
-<span class="tag">Manutenção</span>
-<span class="tag">VTR</span>
-<span class="tag">Infraestrutura</span>
-</div>
+<div class="tags"><span class="tag">Manutenção</span><span class="tag">VTR</span><span class="tag">Infraestrutura</span></div>
 </div>
 <a class="btn" href="https://cbsls.github.io/Chamados/" target="_blank">Abrir</a>
 </div>
@@ -269,7 +241,9 @@ Acesso rápido aos sistemas:
 </div>
 
 <div class="rodape">
-🚒 Sistema interno CBSLS • Painel integrado
+<div>🚒 Sistema interno CBSLS • Painel integrado</div>
+<div class="versao">Versão 1.0.0</div>
+<div>Atualizado: 24/04/2026</div>
 </div>
 
 </div>
