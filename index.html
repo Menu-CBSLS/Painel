@@ -3,8 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🚒 Menu CBSLS</title>
+  <title>🚒 Painel CBSLS</title>
   <meta name="theme-color" content="#0f4c81" />
+
+  <meta name="description" content="Painel de acesso rápido aos sistemas internos do CB São Lourenço do Sul." />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Menu CBSLS" />
 
   <style>
     * {
@@ -144,6 +153,52 @@
       font-size: 0.95rem;
     }
 
+
+
+    .install-btn {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 9999;
+      border: 0;
+      border-radius: 999px;
+      background: #25D366;
+      color: #fff;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.22);
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      animation: pulse 1.7s infinite;
+    }
+
+    .install-btn:hover {
+      background: #1fb85a;
+      transform: translateY(-1px);
+    }
+
+    .install-hint {
+      margin: 14px auto 0;
+      max-width: 520px;
+      background: #ecfdf5;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-size: 0.92rem;
+      display: none;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.45); }
+      70% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+
     @media (max-width: 640px) {
       body {
         padding: 16px;
@@ -159,6 +214,12 @@
 
       .card {
         min-height: auto;
+      }
+
+      .install-btn {
+        left: 16px;
+        right: 16px;
+        width: calc(100% - 32px);
       }
     }
   </style>
@@ -179,6 +240,7 @@
         <strong>Chamados de Manutenção</strong>.
       </p>
       <div class="info-bar">✅ Centralizado • ✅ Rápido • ✅ Profissional</div>
+      <div class="install-hint" id="installHint">📲 Você pode instalar este painel como aplicativo no celular.</div>
     </div>
 
     <div class="grid">
@@ -197,7 +259,7 @@
           </div>
         </div>
 
-        <a class="btn" href="https://controle-numerico.github.io/controle-numerico/" target="_blank" rel="noopener noreferrer">
+        <a class="btn" href="https://cbsls.github.io/controle-numerico/" target="_blank" rel="noopener noreferrer">
           Abrir Controle Numérico
         </a>
       </div>
@@ -285,6 +347,56 @@
     </div>
 
   </div>
+
+
+  <button id="installBtn" class="install-btn" type="button">📲 Instalar App</button>
+
+  <script>
+    let deferredPrompt = null;
+    const installBtn = document.getElementById("installBtn");
+    const installHint = document.getElementById("installHint");
+
+    function isStandalone() {
+      return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+    }
+
+    window.addEventListener("beforeinstallprompt", (event) => {
+      event.preventDefault();
+      deferredPrompt = event;
+
+      if (!isStandalone()) {
+        installBtn.style.display = "inline-flex";
+        installHint.style.display = "block";
+      }
+    });
+
+    installBtn.addEventListener("click", async () => {
+      if (!deferredPrompt) {
+        alert("Se o botão de instalação não abrir, use o menu do navegador e toque em: Adicionar à tela inicial.");
+        return;
+      }
+
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      installBtn.style.display = "none";
+      installHint.style.display = "none";
+    });
+
+    window.addEventListener("appinstalled", () => {
+      installBtn.style.display = "none";
+      installHint.style.display = "none";
+      deferredPrompt = null;
+    });
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").catch((error) => {
+          console.warn("Service Worker não registrado:", error);
+        });
+      });
+    }
+  </script>
 
 </body>
 </html>
