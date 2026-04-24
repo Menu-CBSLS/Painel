@@ -1,0 +1,16 @@
+{
+  "name": "Menu CBSLS",
+  "short_name": "CBSLS",
+  "description": "Painel de acesso rápido aos sistemas internos do CB São Lourenço do Sul.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "background_color": "#ffffff",
+  "theme_color": "#0f4c81",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
